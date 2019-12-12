@@ -1,0 +1,10 @@
+*~
+*.[oa]
+*.psess
+*.vsp
+*.vs
+/Debug
+/*/__vm
+/*/Debug
+/*/obj
+/*/bin

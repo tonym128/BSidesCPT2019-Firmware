@@ -1,0 +1,33 @@
+
+{
+  "users": [
+    {
+      "email": "tony@mail.com",
+      "password": "$2a$10$OBqjpk4upTIQQgqSfQWyGeMNK0D60MVegnhA7poDTXXx/CEfj4x0i",
+      "id": 1
+    }
+  ],
+  "crypto": [
+    {
+      "hi_drive_time": 100,
+      "hi_office_time": 100,
+      "hi_vr1_time": 100,
+      "hi_vr2_time": 100,
+      "hi_vr3_time": 100,
+      "hi_total_time": 500,
+      "id": 1
+    }
+  ],
+  "asteroids": [
+    {
+      "score": 42,
+      "name": "Tony",
+      "mac": "24:0A:C4:12:3B:42",
+      "submitted": false,
+      "id": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

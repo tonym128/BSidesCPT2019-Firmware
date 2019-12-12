@@ -1,0 +1,176 @@
+#include "wifiScanner.h"
+bool wifiFirstRun = true;
+
+void connect(GameBuff *gameBuff) {
+    #ifdef ESP32
+    Serial.print("Connect");
+    WiFi.mode(WIFI_STA);
+    WiFi.disconnect();
+    delay(100);
+    #endif
+}
+
+<<<<<<< HEAD
+struct WifiSSID {
+  char ssid[100];
+  int rrsi;
+  int encryptionType;
+};
+
+int selectedSSID = 0;
+int selectCount = 0;
+int ssidCount = 0;
+struct WifiSSID ssids[50];
+=======
+void displayScan(GameBuff *gameBuff) {
+    displayClear(gameBuff,0x00);
+    drawString2x(gameBuff,"Wifi Setup",0,0,0xFF,0x00);
+    drawString(gameBuff,"Scanning",0,16,0xFF,0x00);
+}
+>>>>>>> cf42509f83a3f4ba5f79135b7f9700e0a8581196
+
+void scan(GameBuff *gameBuff) {
+    displayClear(gameBuff,0x00);
+    drawString2x(gameBuff,"Wifi Setup",0,0,0xFF,0x00);
+    drawString(gameBuff,"Press Start to scan",0,16,0xFF,0x00);
+
+    #ifdef ESP32
+    Serial.println("Scan");
+    ssidCount = WiFi.scanNetworks();
+
+    if(ssidCount > 50) {
+      ssidCount = 50;
+    }
+    
+    if (ssidCount == 0) {
+        Serial.println("No networks");
+        drawString(gameBuff,"No networks found",0,24,0xFF,0x00);
+    } else {
+        Serial.println("Networks");
+        char wifiString[50];
+        for (int i = 0; i < ssidCount; ++i) {
+            strncpy(ssids[i].ssid, WiFi.SSID(i).c_str(), 100);
+            ssids[i].rrsi = WiFi.RSSI(i);
+            ssids[i].encryptionType = (WiFi.encryptionType(i) == WIFI_AUTH_OPEN) ? 0 : 1;
+
+            Serial.println(ssids[i].ssid);
+        }
+    
+        Serial.println("Networks Done");
+    }
+    #endif
+}
+
+int selection = 0;
+bool scanNow = false;
+bool connecting = false;
+
+bool wifiScannerLoop(GameBuff *gameBuff) {
+    // Run scan if pending
+    if (scanNow) {
+        scan(gameBuff);
+        selection = 0;
+        scanNow = false;
+    }
+
+    // Initiate a scan with start button
+    if (gameBuff->playerKeys.select || gameBuff->playerKeys.start) {
+        displayScan(gameBuff);
+        scanNow = true;
+    }
+
+    // Exit screen with keypress
+    if (gameBuff->playerKeys.a && gameBuff->playerKeys.b) {
+        displayScan(gameBuff);
+        wifiFirstRun = true;
+        return true;
+    }
+
+    // If it's the first run setup the wifi
+    if (wifiFirstRun) {
+        displayClear(gameBuff,0x00);
+        wifiFirstRun = false;
+        connect(gameBuff);
+        displayScan(gameBuff);
+        scanNow = true;
+    }
+
+<<<<<<< HEAD
+    displayClear(gameBuff, 0x00);
+
+    if(gameBuff->playerKeys.up) {
+      if(selectCount++ > 5) {
+        Serial.println("UP");
+        selectCount = 0;
+        selectedSSID--;
+      }
+    } else if(gameBuff->playerKeys.down) {
+      if(selectCount++ > 5) {
+        Serial.println("DOWN");
+        selectCount = 0;
+        selectedSSID++;
+      }
+    } else if(gameBuff->playerKeys.a) {
+      if(selectCount++ > 5) {
+        Serial.println("CONNECT");
+        selectCount = 0;
+        WiFi.begin((const char*)ssids[selectedSSID].ssid, (const char*)"monkeyfarm");
+
+        connecting = true;
+      }
+    }
+
+    if(selectedSSID < 0) {
+      selectedSSID = ssidCount - 1;
+    } else if(selectedSSID >= ssidCount) {
+      selectedSSID = 0;
+    }
+
+    if(connecting) {
+      if(WiFi.status() != WL_CONNECTED) {
+        Serial.println("Still connecting");
+      } else {
+        Serial.println("Connected");
+        connecting = false;
+      }
+    }
+
+    drawString(gameBuff,"Networks found",0,24,0xFF,0x00);
+    int y = 32;
+        
+    for (int i = 0; i < ssidCount; ++i) {
+        char ssidDescription[100];
+        sprintf(ssidDescription,"%d:%s (%d):%s",i+1,ssids[i].ssid,ssids[i].rrsi,ssids[i].encryptionType ? "*" : "");
+
+        if(i == selectedSSID) {
+          drawString2x(gameBuff,ssidDescription,0,y,0xFF,0x00);
+          y += 16;
+        } else {
+          drawString(gameBuff,ssidDescription,0,y,0xFF,0x00);
+          y += 8;
+        }
+
+        if(ssidCount >= 50) {
+          break;
+        }
+    }
+
+    // Run scan if pending
+    if (scanNow) {
+        scan(gameBuff);
+        scanNow = false;
+    }
+
+=======
+>>>>>>> cf42509f83a3f4ba5f79135b7f9700e0a8581196
+    // Show current setup
+    drawString(gameBuff,"Current Wifi :",10,gameBuff->HEIGHT-30,0xFF,0x00);
+    drawString(gameBuff,gameBuff->badgeState->ssid,20,gameBuff->HEIGHT-20,0xFF,0x00);
+
+    // Cancel 
+    // Choose Wifi
+    // Enter Pw
+    // Check setup and verify
+    // Save / Cancel
+    return false;
+}

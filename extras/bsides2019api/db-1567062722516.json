@@ -1,0 +1,52 @@
+{
+  "asteroids": [
+    {
+      "id": 1,
+      "score": 0,
+      "name": "tony",
+      "mac": "00:00:00:00"
+    },
+    {
+      "id": 2,
+      "score": 10,
+      "name": "rob",
+      "mac": "11:11:11:11"
+    },
+    {
+      "score": 20,
+      "name": "andrew",
+      "mac": "11:11:21:11",
+      "id": 3
+    },
+    {
+      "score": 30,
+      "name": "andrew",
+      "mac": "11:11:21:11",
+      "id": 4
+    },
+    {
+      "score": 40,
+      "name": "andrew",
+      "mac": "11:11:21:11",
+      "randomvalue": "this thing",
+      "id": 5
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author": "typicode"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

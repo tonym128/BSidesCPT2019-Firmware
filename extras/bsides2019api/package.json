@@ -1,0 +1,16 @@
+{
+  "name": "bsides-2019-api",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "description": "Bsides 2019 API for saving data",
+  "main": "server.js",
+  "dependencies": {
+    "json-server-auth": "^1.2.1",
+    "json-server": "^0.15.0"
+  },
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC"
+}
