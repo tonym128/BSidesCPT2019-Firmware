@@ -2,6 +2,8 @@
 
 Welcome to the repo for the BSides Cape Town 2019 Badge :)
 
+Want to read more about the actual badge and process ? https://ttech.mamacos.media/2019/12/15/making-a-badge.html
+
 # About
 This is the firmware repo for this badge, this is all the software and tooling used in the development of the badges (outside of the Arduino IDE / ESP32 toolchain and TFT_eSPI library)
 
