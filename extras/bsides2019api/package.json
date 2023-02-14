@@ -7,8 +7,8 @@
   "description": "Bsides 2019 API for saving data",
   "main": "server.js",
   "dependencies": {
-    "json-server-auth": "^1.2.1",
-    "json-server": "^0.15.0"
+    "json-server-auth": "^2.1.0",
+    "json-server": "^0.17.1"
   },
   "devDependencies": {},
   "author": "",
